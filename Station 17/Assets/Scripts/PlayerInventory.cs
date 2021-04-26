@@ -78,4 +78,9 @@ public class PlayerInventory : MonoBehaviour
 
         return found;
     }
+
+    public void CleanInventory()
+    {
+        items.Clear();
+    }
 }

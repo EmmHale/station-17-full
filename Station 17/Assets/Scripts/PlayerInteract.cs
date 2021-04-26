@@ -26,6 +26,13 @@ public class PlayerInteract : MonoBehaviour
         set { controls_enabled = value; }
     }
 
+    struct attributes
+    {
+        public float farClip;
+    }
+
+    attributes baseAttributes = new attributes();
+
 
     // Start is called before the first frame update
     void Start()
@@ -51,6 +58,7 @@ public class PlayerInteract : MonoBehaviour
         
         Cursor.visible = false;
 
+        baseAttributes.farClip = GetComponent<Camera>().farClipPlane;
         //Save current render distance
         baseRenderDistance = GetComponent<Camera>().farClipPlane;
     }
@@ -105,6 +113,17 @@ public class PlayerInteract : MonoBehaviour
     public bool IsFogMoved()
     {
         return timeSinceTogglePhone < timeToFadeBlackPhone;
+    }
+
+    public void SetViewDistance(float distance)
+    {
+        GetComponent<Camera>().farClipPlane = distance;
+        baseRenderDistance = distance;
+    }
+
+    public void ResetAttributes()
+    {
+        GetComponent<Camera>().farClipPlane = baseAttributes.farClip;
     }
 
     void Update()
@@ -248,7 +267,7 @@ public class PlayerInteract : MonoBehaviour
         }
 
         //If right click
-        if (Input.GetMouseButtonDown(1) && controls_enabled && !usingSettings)
+        if (Input.GetMouseButtonDown(1) && controls_enabled && !usingSettings && !using_phone)
         {
             //ZOOM
             if(!zooming)
@@ -266,7 +285,7 @@ public class PlayerInteract : MonoBehaviour
         }
 
         //If Left Click
-        if (Input.GetMouseButtonDown(0) && controls_enabled && !usingSettings)
+        if (Input.GetMouseButtonDown(0) && controls_enabled && !usingSettings && !using_phone)
         {
             //Light
             zoomLight.SetActive(!zoomLight.activeSelf);
@@ -351,6 +370,18 @@ public class PlayerInteract : MonoBehaviour
                 OpenSettings();
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.Tab) && controls_enabled)
+        {
+            if (InventoryUIManager.instance.IsEnabled())
+            {
+                InventoryUIManager.instance.DisableUI();
+            }
+            else
+            {
+                InventoryUIManager.instance.EnableUI();
+            }
+        }
     }
 
     public void OpenSettings()
@@ -370,26 +401,42 @@ public class PlayerInteract : MonoBehaviour
         Cursor.visible = true;
     }
 
+    public bool doing_popup = false;
+
     public void StartLongPopup()
     {
+        doing_popup = true;
+        //lock player into popup
         Controllable = false;
+        doing_long_action = true;
+        using_phone = true;
         PlayerMovement.instance.ToggleMovement();
-
-        //doing_long_action = true;
-
+        playerLook.lockCamera = true;
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
+
+        //start fog
+        baseRenderDistance = gameObject.GetComponent<Camera>().farClipPlane;
+        timeSinceTogglePhone = 0;
     }
 
     public void StopLongPopup()
     {
+        doing_popup = false;
+
+        //unLock player from popup
         Controllable = true;
+        doing_long_action = false;
+        using_phone = false;
         PlayerMovement.instance.ToggleMovement();
-
-        //doing_long_action = false;
-
+        playerLook.lockCamera = false;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+
+        //Stop fog
+        baseRenderDistance = gameObject.GetComponent<Camera>().farClipPlane;
+        timeSinceTogglePhone = 0;
     }
 
     public void CloseSettings()
@@ -433,6 +480,9 @@ public class PlayerInteract : MonoBehaviour
             timeSinceZoom = 0;
             GetComponent<Camera>().fieldOfView = baseFov - baseFov * (zoom_rate);
         }
+
+        uiInteractText.GetComponent<TMPro.TextMeshProUGUI>().text = "";
+        InventoryUIManager.instance.DisableUI();
     }
 
     //Exit game
@@ -485,6 +535,14 @@ public class PlayerInteract : MonoBehaviour
                 timeSinceTogglePhone = 0;
             }
         }
-        
+
+        zoomLight.SetActive(false);
+
+        if (zooming)
+        {
+            zooming = false;
+            timeSinceZoom = 0;
+            GetComponent<Camera>().fieldOfView = baseFov - baseFov * (zoom_rate);
+        }
     }
 }

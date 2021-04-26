@@ -48,6 +48,9 @@ public class Enemy : MonoBehaviour
 
     public LayerMask layerMaskSphere = new LayerMask();
 
+    [Tooltip("Enable peekaBoo mode")]
+    public bool peekaBoo = false;
+
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -73,6 +76,7 @@ public class Enemy : MonoBehaviour
             {
                 other.gameObject.GetComponent<Animator>().SetBool("IsOpen", true);
                 other.gameObject.GetComponent<Animator>().SetBool("IsClosed", false);
+
             }
         }
     }
@@ -109,7 +113,7 @@ public class Enemy : MonoBehaviour
         if(active)
             distance = Vector3.Distance(PlayerInteract.instance.transform.position, transform.position);
 
-        if (active && distance <= lookRadius)
+        if (active && distance <= lookRadius && !peekaBoo)
         {
             //Check for player proximity
 
@@ -129,7 +133,7 @@ public class Enemy : MonoBehaviour
                 }
                 else
                 {
-                    if(timeSinceStartMoving >= timeMoving)
+                    if (timeSinceStartMoving >= timeMoving)
                     {
                         StopMoving();
                     }
@@ -193,6 +197,24 @@ public class Enemy : MonoBehaviour
                 }
             }
         }
+        else if (active && distance <= lookRadius && peekaBoo)
+        {
+            if (RendererExtensions.IsVisibleFrom(GetComponent<Renderer>(), Camera.main))
+            {
+                if (isMoving)
+                    StopMoving();
+            }
+            else
+            {
+                StartMoving();
+            }
+        }
+        else
+        {
+            if(isMoving)
+                StopMoving();
+        }
+
     }
 
     public void StopMoving()
@@ -218,7 +240,7 @@ public class Enemy : MonoBehaviour
         if (agent.CalculatePath(PlayerInteract.instance.transform.position, path))
         {
             agent.SetDestination(PlayerInteract.instance.transform.position);
-            if (source)
+            if (source && !source.isPlaying)
             {
                 source.clip = walkClips[Random.Range(0, walkClips.Count - 1)];
                 source.Play();

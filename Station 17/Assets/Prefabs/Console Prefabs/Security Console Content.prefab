@@ -2927,7 +2927,7 @@ MonoBehaviour:
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 1
+  m_ScrollSensitivity: 20
   m_Viewport: {fileID: 4463036672447136882}
   m_HorizontalScrollbar: {fileID: 4463036673130977723}
   m_VerticalScrollbar: {fileID: 4463036673653861771}
@@ -3242,7 +3242,7 @@ MonoBehaviour:
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 1
+  m_ScrollSensitivity: 20
   m_Viewport: {fileID: 4463036673898205612}
   m_HorizontalScrollbar: {fileID: 4463036673570754899}
   m_VerticalScrollbar: {fileID: 4463036672762736768}
@@ -4225,7 +4225,7 @@ MonoBehaviour:
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 1
+  m_ScrollSensitivity: 20
   m_Viewport: {fileID: 4463036673344257957}
   m_HorizontalScrollbar: {fileID: 4463036673509396289}
   m_VerticalScrollbar: {fileID: 4463036674133386998}
@@ -5537,7 +5537,7 @@ MonoBehaviour:
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 1
+  m_ScrollSensitivity: 20
   m_Viewport: {fileID: 4463036673290578763}
   m_HorizontalScrollbar: {fileID: 4463036673227788038}
   m_VerticalScrollbar: {fileID: 4463036672542161427}
@@ -6711,7 +6711,7 @@ MonoBehaviour:
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 1
+  m_ScrollSensitivity: 20
   m_Viewport: {fileID: 4463036674171333458}
   m_HorizontalScrollbar: {fileID: 4463036672541834773}
   m_VerticalScrollbar: {fileID: 4463036672981837086}
@@ -7079,7 +7079,7 @@ MonoBehaviour:
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 1
+  m_ScrollSensitivity: 20
   m_Viewport: {fileID: 4463036672846547409}
   m_HorizontalScrollbar: {fileID: 4463036672710356004}
   m_VerticalScrollbar: {fileID: 4463036673101553268}
@@ -10388,7 +10388,7 @@ MonoBehaviour:
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 1
+  m_ScrollSensitivity: 20
   m_Viewport: {fileID: 4463036673897772676}
   m_HorizontalScrollbar: {fileID: 4463036674080572179}
   m_VerticalScrollbar: {fileID: 4463036672649746003}

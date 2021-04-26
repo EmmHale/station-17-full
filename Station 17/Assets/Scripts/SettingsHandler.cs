@@ -10,6 +10,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
+using System.Linq;
+
 public class SettingsHandler : MonoBehaviour
 {
     public AudioMixer mixer;
@@ -35,7 +37,7 @@ public class SettingsHandler : MonoBehaviour
         {
             instance = this;
 
-            resolutions = Screen.resolutions;
+            resolutions = Screen.resolutions.Where(resolution => resolution.refreshRate == 60).ToArray();
 
             resolutionDropdown.ClearOptions();
 
@@ -54,6 +56,7 @@ public class SettingsHandler : MonoBehaviour
                     current = i;
                 }
             }
+
             resolutionDropdown.ClearOptions();
             //Adds options
             resolutionDropdown.AddOptions(options);

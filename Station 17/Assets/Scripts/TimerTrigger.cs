@@ -14,6 +14,10 @@ public class TimerTrigger : MonoBehaviour
 
     private float currentTimePassed = 0;
 
+    public bool repeatable = true;
+
+    private bool done = false;
+
     // Update is called once per frame
     void Update()
     {
@@ -26,14 +30,18 @@ public class TimerTrigger : MonoBehaviour
                 timerOn = false;
                 currentTimePassed = 0;
                 OnTimerFinish.Invoke();
+                done = true;
             }
         }
     }
 
     public void StartTimer()
     {
-        timerOn = true;
-        currentTimePassed = 0;
-        OnTimerStart.Invoke();
+        if (repeatable || !done)
+        {
+            timerOn = true;
+            currentTimePassed = 0;
+            OnTimerStart.Invoke();
+        }
     }
 }

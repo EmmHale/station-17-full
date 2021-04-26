@@ -36,7 +36,7 @@ public class Interactable : MonoBehaviour
     {
         if (requiredItem == null || (requiredItem != null && PlayerInventory.instance.Search(requiredItem)))
         {
-            if (!isCharge)
+            if (!isCharge && !willFail)
             {
                 OnCompleteAction.Invoke();
                 completed = true;
@@ -64,6 +64,11 @@ public class Interactable : MonoBehaviour
             OnCompleteAction.Invoke();
             completed = true;
         }
+    }
+
+    public void SaveInteraction()
+    {
+        saved = true;
     }
 
     public virtual void PlayerDied()

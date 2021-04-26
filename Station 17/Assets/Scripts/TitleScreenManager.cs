@@ -91,10 +91,15 @@ public class TitleScreenManager : MonoBehaviour
         Cursor.visible = true;
     }
 
+    public Item package;
+
     public void ReturnToMain()
     {
         StartCoroutine(PlayerLoadManager.instance.LoadFloor(0, 0, true));
         StartCoroutine(PausePlayerActions());
+        PlayerInventory.instance.CleanInventory();
+        PlayerInventory.instance.Add(package);
+        
     }
     public IEnumerator PausePlayerActions()
     {

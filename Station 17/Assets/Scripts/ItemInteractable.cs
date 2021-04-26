@@ -10,6 +10,15 @@ using UnityEngine;
 public class ItemInteractable : Interactable
 {
     public Item item;
+    public Vector3 defaultPosition;
+    public Quaternion defaultRotation;
+
+    public void Start()
+    {
+        defaultPosition = transform.position;
+        defaultRotation = transform.rotation;
+    }
+
     public override bool PreformAction()
     {
         base.PreformAction();
@@ -22,4 +31,12 @@ public class ItemInteractable : Interactable
 
         return true;
     }
+
+    public void ResetPosition()
+    {
+        transform.position = defaultPosition;
+        transform.rotation = defaultRotation;
+    }
+
+
 }

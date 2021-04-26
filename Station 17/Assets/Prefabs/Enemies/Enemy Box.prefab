@@ -46,7 +46,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 1515566050347706685}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 1
   m_Speed: 5
   m_Acceleration: 20
   avoidancePriority: 50
@@ -71,8 +71,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c40a4d52e35de4c4f980eff4325c64d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  active: 0
   lookRadius: 40
-  jumpRange: 1
   timeBetweenMoves: 1
   timeMoving: 0.5
   source: {fileID: 1515566050347706687}
@@ -80,6 +80,13 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 9f6783c0c22941b4896f79662caacda2, type: 3}
   defaultPosition: {x: 0, y: 0, z: 0}
   defaultRotation: {x: 0, y: 0, z: 0, w: 0}
+  isSmart: 0
+  jumpRange: 1
+  enemyTypeID: -1
+  layerMaskSphere:
+    serializedVersion: 2
+    m_Bits: 0
+  peekaBoo: 0
 --- !u!54 &1515566050347706673
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -358,6 +365,10 @@ PrefabInstance:
     - target: {fileID: 1412463589006636, guid: f2b1c300a6cdfb14c98d8e2408ca7884, type: 3}
       propertyPath: m_Layer
       value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 1412463589006636, guid: f2b1c300a6cdfb14c98d8e2408ca7884, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4395347528790848, guid: f2b1c300a6cdfb14c98d8e2408ca7884, type: 3}
       propertyPath: m_RootOrder

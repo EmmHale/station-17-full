@@ -14,6 +14,29 @@ public class HiddenDoorButtonInteractable : Interactable
     public override bool PreformAction()
     {
         Debug.Log("Moving Door...");
+        if (!isCharge)
+        {
+            if (DoorAnimator.GetBool("IsOpening"))
+            {
+
+                DoorAnimator.SetBool("IsOpening", false);
+                DoorAnimator.SetBool("IsClosing", true);
+                interactText = "E: Push Button";
+            }
+            else
+            {
+                DoorAnimator.SetBool("IsOpening", true);
+                DoorAnimator.SetBool("IsClosing", false);
+                interactText = "E: Push Button";
+            }
+        }
+
+        return base.PreformAction();
+    }
+
+    public override void CompleteAction()
+    {
+        Debug.Log("Moving Door...");
         if (DoorAnimator.GetBool("IsOpening"))
         {
 
@@ -28,6 +51,6 @@ public class HiddenDoorButtonInteractable : Interactable
             interactText = "E: Push Button";
         }
 
-        return true;
+        base.CompleteAction();
     }
 }

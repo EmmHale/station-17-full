@@ -108,7 +108,9 @@ public class PlayerMovement : MonoBehaviour
         transform.rotation = currentCheckpointRotation;
         controller.enabled = true;
 
-        if(PlayerInteract.instance != null && PlayerInteract.instance.IsUsingPhone())
+        ConsoleContentLoader.instance.CloseConsole();
+
+        if (PlayerInteract.instance != null && PlayerInteract.instance.IsUsingPhone())
         {
             PlayerInteract.instance.TogglePhone();
         }

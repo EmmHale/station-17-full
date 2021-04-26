@@ -16,7 +16,7 @@ using UnityEngine.SceneManagement;
 public class PlayerSaveData 
 {
     //current number of playable floors in game
-    public const int NUM_FLOORS = 3;
+    public const int NUM_FLOORS = 5;
 
     //Names of all items in inventory
     public List<string> inventory;

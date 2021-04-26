@@ -57,4 +57,13 @@ public class DoorInteractable : Interactable
         return true;
     }
 
+    public void CloseDoor()
+    {
+        if (DoorAnimator.GetBool("IsOpen"))
+        {
+            DoorAnimator.SetBool("IsOpen", false);
+            DoorAnimator.SetBool("IsClosed", true);
+            interactText = "E: Open Door";
+        }
+    }
 }

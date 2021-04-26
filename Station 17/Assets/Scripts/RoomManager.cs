@@ -117,6 +117,23 @@ public class RoomManager : MonoBehaviour
         }
     }
 
+    public void FastDeavtivate()
+    {
+        if (roomActive)
+        {
+            roomActive = false;
+
+            foreach (Enemy enemy in enemyList)
+            {
+                enemy.DeactivateEnemy();
+                enemy.gameObject.GetComponent<NavMeshAgent>().isStopped = true;
+                enemy.gameObject.GetComponent<NavMeshAgent>().ResetPath();
+                enemy.gameObject.GetComponent<NavMeshAgent>().Warp(enemy.defaultPosition);
+                enemy.transform.rotation = enemy.defaultRotation;
+            }
+        }
+    }
+
     //Save a rooms progression
     public void SaveRoom()
     {

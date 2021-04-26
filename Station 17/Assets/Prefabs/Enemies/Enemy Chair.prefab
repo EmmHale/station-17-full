@@ -208,8 +208,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c40a4d52e35de4c4f980eff4325c64d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  active: 0
   lookRadius: 20
-  jumpRange: 1
   timeBetweenMoves: 0.75
   timeMoving: 0.5
   source: {fileID: 5936457956480186289}
@@ -217,6 +217,13 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 9f6783c0c22941b4896f79662caacda2, type: 3}
   defaultPosition: {x: 0, y: 0, z: 0}
   defaultRotation: {x: 0, y: 0, z: 0, w: 0}
+  isSmart: 0
+  jumpRange: 1
+  enemyTypeID: -1
+  layerMaskSphere:
+    serializedVersion: 2
+    m_Bits: 0
+  peekaBoo: 0
 --- !u!54 &5936457956480186303
 Rigidbody:
   m_ObjectHideFlags: 0

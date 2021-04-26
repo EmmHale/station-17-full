@@ -123,7 +123,7 @@ public class PlayerLoadManager : MonoBehaviour
         StartCoroutine(LoadFloor(data.floorID, data.saveLocationID));
     }
 
-    public void LoadFloorToFloor(int level_index, int entry_postion)
+    public void LoadFloorToFloor(int level_index, int entry_postion, bool fast = false)
     {
         //Save current floor data
         CurrentFloorData[SceneManager.GetActiveScene().buildIndex] = new FloorData(SceneManager.GetActiveScene().buildIndex);
@@ -135,7 +135,10 @@ public class PlayerLoadManager : MonoBehaviour
         }
 
         //Start loading the floor
-        StartCoroutine(LoadFloor(level_index, entry_postion));
+        if(!fast)
+            StartCoroutine(LoadFloor(level_index, entry_postion));
+        else
+            StartCoroutine(LoadFloor(level_index, entry_postion, false, true));
     }
 
     public void SavePlayerData(string name, int ID)
@@ -174,17 +177,19 @@ public class PlayerLoadManager : MonoBehaviour
 
 
     //Does not set current data. Use when loading save or returning to main menu
-    public IEnumerator LoadFloor(int level_index, int entry_postion, bool going_to_main = false)
+    public IEnumerator LoadFloor(int level_index, int entry_postion, bool going_to_main = false, bool fast = false)
     {
-        transition.SetTrigger("Start");
+        if(!fast)
+            transition.SetTrigger("Start");
 
         PlayerInteract.instance.Controllable = false;
         PlayerMovement.instance.ToggleMovement();
 
-        yield return new WaitForSeconds(2);
+        if(!fast)
+            yield return new WaitForSeconds(2);
 
         //If we are not returning to main menu, save data
-        if(!going_to_main)
+        if (!going_to_main)
         {
             //Make new floor data from empty data
             //CurrentFloorData[SceneManager.GetActiveScene().buildIndex] = new FloorData(SceneManager.GetActiveScene().buildIndex);
@@ -244,9 +249,12 @@ public class PlayerLoadManager : MonoBehaviour
                 }
             }
         }
-        
+
+        SpookyPlaneController.instance.DisablePlane();
+        PlayerInteract.instance.ResetAttributes();
+
         //Search for the proper spawn and sets players location
-        foreach(SpawnLocation spawn in SpawnLocation.spawnLocations)
+        foreach (SpawnLocation spawn in SpawnLocation.spawnLocations)
         {
             Debug.Log("Checking spawn...");
             if(spawn.spawnID == entry_postion)
@@ -268,6 +276,7 @@ public class PlayerLoadManager : MonoBehaviour
         PlayerInteract.instance.Controllable = true;
         //turn on sound
         SettingsHandler.instance.SetVolume(tempVolume);
+        
     }
 
     public void ClearData()

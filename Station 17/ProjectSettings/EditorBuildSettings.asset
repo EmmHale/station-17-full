@@ -14,4 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Station Level 2.unity
     guid: 9041d07f1dcba1b4fa5595b796d22e24
+  - enabled: 1
+    path: Assets/Scenes/The Vents.unity
+    guid: f1ebcfd723cb2f84e8b2546fdfe10e6f
+  - enabled: 1
+    path: Assets/Scenes/Station Level 13.unity
+    guid: e22f86e602d624749a42610b55eb34db
   m_configObjects: {}
